@@ -19,7 +19,7 @@ const App: React.FC = () => {
       {/* Language Button */}
       <div
       dir="rtl"
-      className="fixed right-4 top-4 z-[999] rounded-full border border-amber-200 bg-[#f7edd8]/90 p-1 shadow-xl backdrop-blur font-ar">
+      className="fixed right-4 top-2 z-[999] rounded-full border border-amber-200 bg-[#f7edd8]/90 p-1 shadow-xl backdrop-blur font-ar">
         <div className="flex gap-1">
           {(["ar", "en", "th"] as const).map((item: Lang) => (
             <button

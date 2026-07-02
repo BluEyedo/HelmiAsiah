@@ -153,142 +153,155 @@ export default function Information({ lang }: Props) {
   return (
     <section
       ref={ref}
-      className={`relative pt-[50px] bg-white shadow-[0_10px_40px_rgba(0,0,0,0.25)] text-[#A25E77] overflow-hidden`}
+      dir={lang === "ar" ? "rtl" : "ltr"}
+      className="relative overflow-hidden bg-white pt-12 text-[#A25E77] shadow-[0_10px_40px_rgba(0,0,0,0.18)]"
     >
-      <div className="absolute w-full h-full ">
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none">
         <img
           src="background-wide.png"
-          className="object-contain w-full h-full opacity-50"
+          alt=""
+          className="h-full w-full object-cover opacity-60"
         />
       </div>
 
+      {/* Scroll Hint */}
       <div
-        className={`fixed bottom-1 left-0 right-0 z-[999] flex justify-center ${scrollY > 300 && "opacity-0"} duration-300`}
+        className={`fixed bottom-3 left-0 right-0 z-[999] flex justify-center transition-all duration-300 ${
+          scrollY > 300
+            ? "opacity-0 translate-y-4 pointer-events-none"
+            : "opacity-100"
+        }`}
       >
-        <div className="bg-yellow-100 p-2 m-2 rounded-lg shadow-sm shadow-yellow-600 flex items-center gap-3 opacity-70">
-          <BiChevronDown className="pointing text-xl text-orange-600" />
-          <p className="text-xl ">
-            {lang == "ar" && "مرّر للأسفل"}
-            {lang == "th" && "เลื่อนลง"}
-            {lang == "en" && "scroll down"}
+        <div className="mx-4 flex items-center gap-2 rounded-full border border-yellow-300 bg-yellow-50/90 px-4 py-2 text-orange-700 shadow-lg backdrop-blur">
+          <BiChevronDown className="pointing text-2xl" />
+          <p className="text-sm font-semibold sm:text-base">
+            {lang === "ar" && "مرّر للأسفل"}
+            {lang === "th" && "เลื่อนลง"}
+            {lang === "en" && "Scroll down"}
           </p>
         </div>
       </div>
 
-      {/* Main Card */}
-      <motion.div className="sticky top-0 max-w-screen-lg p-5  mx-auto flex justify-center px-3  pb-[160px]">
+      <motion.div className="relative z-10 mx-auto flex min-h-screen max-w-5xl justify-center px-4 pb-32 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="w-full max-w-3xl overflow-hidden"
+          transition={{ duration: 0.8 }}
+          className="w-full max-w-4xl"
         >
-          <div className="text-center ">
+          <div className=" p-5 text-center  sm:p-8 lg:p-10">
+            {/* Top Section */}
             <motion.section
-              initial={{  x: 50 }}
-              whileInView={{  x: 0 }}
-              transition={{ duration: 1 }}
-              className="relative z-10 "
+              initial={{ x: 50 }}
+              whileInView={{ x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative z-10"
             >
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                // viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
                 className="flex justify-center"
               >
                 <img
                   src="basmalah.png"
                   alt="basmalah"
-                  className="w-[300px] pb-5"
+                  className="mb-6 w-56 sm:w-72"
                 />
               </motion.div>
 
-              <div
-                className="flex justify-between font-th items-center
-            text-sm text-[#A25E77] sm:text-xl text-left scale-100 w-f
-            "
-              >
-                <div className="absolute  justify-center right-[50%]">และ</div>
-
+              <div className="relative grid grid-cols-1 gap-3 text-center text-sm font-semibold sm:grid-cols-[1fr_auto_1fr] sm:text-lg">
                 <div>{t.brideParent}</div>
+                <div className="text-[#C47A91]">
+                  {lang === "th" ? "และ" : "&"}
+                </div>
                 <div>{t.groomParent}</div>
               </div>
 
-              <div className="text-xl mt-3">{t.invitors}</div>
+              <p className="mt-4 text-lg font-medium sm:text-xl">
+                {t.invitors}
+              </p>
 
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 className="mt-8"
               >
-                <p className="text-xl text-[#A25E77] sm:text-2xl mb-5">
+                <p className="mx-auto mb-5 max-w-2xl text-lg leading-relaxed sm:text-2xl">
                   {t.invite}
                 </p>
-                <p className="font-black text-4xl">
-                  {lang == "ar" && "بين"}
-                  {lang == "th" && "ระหว่าง"}
-                  {lang == "en" && "between"}
+
+                <p className="text-3xl font-black sm:text-4xl">
+                  {lang === "ar" && "بين"}
+                  {lang === "th" && "ระหว่าง"}
+                  {lang === "en" && "Between"}
                 </p>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.9 }}
-                className="mt-3 flex justify-center"
+                transition={{ duration: 0.8 }}
+                className="mt-5 flex justify-center"
               >
                 <img
                   src={
-                    lang == "ar" ? "asiah&helmi-ar.png" : "asiah&helmi-en.png"
+                    lang === "ar"
+                      ? "asiah&helmi-ar.png"
+                      : "asiah&helmi-en.png"
                   }
-                  className="w-[600px]"
+                  alt="couple names"
+                  className="w-full max-w-[620px]"
                 />
               </motion.div>
             </motion.section>
 
-            {/*  bottom section */}
+            {/* Bottom Section */}
             <motion.section
               style={{ y: -textY }}
-              className="relative z-50 bg-white"
+              className="relative z-20 mt-6"
             >
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="w-full p-5 bg-[#A25E77] rounded-full text-white text-3xl font-bold "
+                className="mx-auto max-w-2xl rounded-full bg-[#A25E77] px-6 py-4 text-xl font-bold text-white shadow-lg sm:text-3xl"
               >
                 {t.date}
               </motion.div>
 
+              {/* Event Info */}
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="grid grid-cols-4 items-start text-[#A25E77] sm:text-xl mt-16 w-full"
+                className="mt-12 grid gap-8 text-[#A25E77] sm:grid-cols-[220px_1fr] sm:text-xl"
               >
-                <div className="flex flex-col gap-5 items-center">
-                  <img src={"utensils.png"} className="w-[150px]" />
+                <div className="flex flex-col items-center justify-center gap-4 rounded-3xl bg-[#A25E77]/5 p-5 ring-1 ring-[#A25E77]/10">
+                  <img src="utensils.png" alt="" className="w-24 sm:w-32" />
                   <p className="font-bold">
-                    10:00 - 17:00 {lang == "th" && "น."}
+                    10:00 - 17:00 {lang === "th" && "น."}
                   </p>
                 </div>
 
                 <aside
-                  className={`col-span-3 ${lang == "ar" ? "border-r-2 pr-5" : "border-l-2 pl-5"} border-[#B46278] `}
+                  className={` bg-white/70 p-5 text-start ring-1 ring-[#A25E77]/10 ${
+                    lang === "ar" ? "border-r-4" : "border-l-4"
+                  } border-[#B46278]`}
                 >
-                  <section className="flex items-start gap-3">
-                    <div className="h-13 w-13 bg-[#B46278] rounded-full p-2">
-                      <GoHomeFill className=" text-white text-[20px]" />
+                  <section className="flex items-start gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#B46278]">
+                      <GoHomeFill className="text-xl text-white" />
                     </div>
 
-                    <div className="font-bold text-[#A25E77] text-lg text-start ">
-                      <p className="font-th text-2xl">
+                    <div className="font-bold leading-relaxed">
+                      <p className="font-th text-xl sm:text-2xl">
                         สถาบันกีรออาตีอารีย์สมัยปูยุด
                       </p>
-                      <p className="font-en">
+                      <p className="font-en text-base sm:text-lg">
                         Baraho, Mueang Pattani District, Pattani 94000
                       </p>
-                      <p className="font-ar">
+                      <p className="font-ar text-base sm:text-lg">
                         معهد القراءات العصرية – فوجوء براهو، مدينة فطاني، محافظة
                         فطاني 94000
                       </p>
@@ -297,70 +310,83 @@ export default function Information({ lang }: Props) {
                 </aside>
               </motion.div>
 
+              {/* Contact + Theme + Map */}
               <motion.div
-                initial={{ opacity: 0, x: lang == "ar" ? 40 : -40 }}
+                initial={{ opacity: 0, x: lang === "ar" ? 40 : -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
-                className=" items-start text-[#A25E77] sm:text-xl  w-full "
+                className="mt-8 grid gap-6 text-[#A25E77] lg:grid-cols-[1fr_1.4fr]"
               >
-                <section className="grid grid-cols-5 w-full">
-                  <aside className="col-span-2 text-start font-bold mt-5">
-                    {lang === "th" ? (
-                      <>
-                        <p>099-2209720 (เจ้าบ่าว)</p>
-                        <p>061-4796203 (เจ้าสาว)</p>
-                        <p>0619219329 (คุณพ่อเจ้าสาว)</p>
-                        <p>0631067094 (คุณแม่เจ้าสาว)</p>
-                      </>
-                    ) : lang === "ar" ? (
-                      <>
-                        <p>099-2209720 (العريس)</p>
-                        <p>061-4796203 (العروس)</p>
-                        <p>0619219329 (والد العروس)</p>
-                        <p>0631067094 (والدة العروس)</p>
-                      </>
-                    ) : (
-                      <>
-                        <p>099-2209720 (Groom)</p>
-                        <p>061-4796203 (Bride)</p>
-                        <p>0619219329 (Bride's Father)</p>
-                        <p>0631067094 (Bride's Mother)</p>
-                      </>
-                    )}
-                  </aside>
-                  <aside className="flex justify-between mt-5 col-span-3 items-end">
-                    <div className="flex flex-col items-start">
-                      <p className="font-black font-en text-xl mb-3">Theme:</p>
-                      <div className="flex flex-row">
-                        <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-full bg-[#D48AA8]"></div>
-                          <div className="h-10 w-10 rounded-full bg-[#F48C8C]"></div>
-                          <div className="h-10 w-10 rounded-full bg-[#FCE1DC]"></div>
-                          <div className="h-10 w-10 rounded-full bg-[#FDEBD9]"></div>
-                          <div className="h-10 w-10 rounded-full bg-[#FFC58F]"></div>
-                        </div>
-                      </div>
-                    </div>
+                <aside className="rounded-3xl bg-[#A25E77]/5 p-5 text-start text-sm font-bold leading-8 ring-1 ring-[#A25E77]/10 sm:text-base">
+                  {lang === "th" ? (
+                    <>
+                      <p>099-2209720 (เจ้าบ่าว)</p>
+                      <p>061-4796203 (เจ้าสาว)</p>
+                      <p>061-9219329 (คุณแม่เจ้าบ่าว)</p>
+                      <p>063-1067094 (คุณแม่เจ้าสาว)</p>
+                    </>
+                  ) : lang === "ar" ? (
+                    <>
+                      <p>099-2209720 (العريس)</p>
+                      <p>061-4796203 (العروس)</p>
+                      <p>061-9219329 (والدة العريس)</p>
+                      <p>063-1067094 (والدة العروس)</p>
+                    </>
+                  ) : (
+                    <>
+                      <p>099-2209720 (Groom)</p>
+                      <p>061-4796203 (Bride)</p>
+                      <p>061-9219329 (Groom's Mother)</p>
+                      <p>063-1067094 (Bride's Mother)</p>
+                    </>
+                  )}
+                </aside>
 
-                    <div className="flex flex-col items-center gap-3">
-                      <img src={"scan.png"} className="w-[80px] sm:w-[100px]" />
-                      <button
-                        className=" rounded-xl duration-200 hover:bg-slate-200 p-1 shadow-sm text-sm"
-                        onClick={() => {
-                          window.open(
-                            "https://maps.app.goo.gl/vKCMsrikEJEEQS466",
-                            "_blank",
-                          );
-                        }}
-                      >
-                        📍 Open Map
-                      </button>
+                <aside className="flex flex-col gap-6 rounded-3xl bg-white/70 p-5 ring-1 ring-[#A25E77]/10 sm:flex-row sm:items-end sm:justify-between">
+                  <div className="text-start">
+                    <p className="mb-3 font-en text-xl font-black">Theme:</p>
+
+                    <div className="flex flex-wrap gap-3">
+                      {[
+                        "#D48AA8",
+                        "#F48C8C",
+                        "#FCE1DC",
+                        "#FDEBD9",
+                        "#FFC58F",
+                      ].map((color) => (
+                        <div
+                          key={color}
+                          className="h-9 w-9 rounded-full shadow-inner ring-1 ring-black/5 sm:h-10 sm:w-10"
+                          style={{ backgroundColor: color }}
+                        />
+                      ))}
                     </div>
-                  </aside>
-                </section>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-3">
+                    <img
+                      src="qrcode.png"
+                      alt="map qr code"
+                      className="w-24 sm:w-28"
+                    />
+
+                    <button
+                      type="button"
+                      className="rounded-full bg-[#A25E77] px-4 py-2 text-sm font-bold text-white shadow-md transition hover:bg-[#8f4f67]"
+                      onClick={() =>
+                        window.open(
+                          "https://maps.app.goo.gl/bDwzBkdp59JE5ReR6?g_st=ac",
+                          "_blank",
+                        )
+                      }
+                    >
+                      📍 Open Map
+                    </button>
+                  </div>
+                </aside>
               </motion.div>
 
-              <div className="text-[#A25E77] mt-10 text-xl font-bold">
+              <div className="mt-10 text-base font-bold text-[#A25E77] sm:text-xl">
                 {lang === "th" && `( ขออภัยหากมิได้เรียนเชิญด้วยตนเอง )`}
                 {lang === "en" &&
                   `( We apologize for not being able to invite you in person. )`}

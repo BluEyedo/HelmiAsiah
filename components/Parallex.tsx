@@ -111,7 +111,7 @@ export default function ParallaxHero({ lang }: Props) {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto h-screen max-w-screen-sm overflow-hidden shadow-lg shadow-rose-200 bg-white scale-100"
+      className="mx-auto h-screen pt-2 max-w-screen-sm overflow-hidden shadow-lg shadow-rose-200 bg-white scale-100"
     >
       <div className="absolute w-full h-full">
         <img src="background.png" />
@@ -207,7 +207,7 @@ export default function ParallaxHero({ lang }: Props) {
               whileInView="visible"
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="flex items-center justify-between gap-3 text-[#A25E77] sm:justify-center sm:gap-16 sm:text-xl"
+              className="flex items-center justify-center gap-3 text-[#A25E77] sm:gap-16 sm:text-xl"
             >
               {t.invitation}
             </motion.div>
