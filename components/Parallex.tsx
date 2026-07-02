@@ -111,17 +111,18 @@ export default function ParallaxHero({ lang }: Props) {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto h-screen pt-2 max-w-screen-sm overflow-hidden shadow-lg shadow-rose-200 bg-white scale-100"
+      className="relative mx-auto min-h-screen max-w-screen-sm overflow-hidden bg-white pt-2 shadow-lg shadow-rose-200"
     >
-      <div className="absolute w-full h-full">
-        <img src="background.png" />
+      <div className="absolute inset-0">
+        <img src="background.png" className="h-full w-full object-cover" />
       </div>
 
       <motion.div
-        style={{ y: textY, 
-          // opacity: textOpacity 
+        style={{
+          y: textY,
+          // opacity: textOpacity
         }}
-        className="relative z-50 flex h-full px-6 text-center"
+        className="relative z-50 flex min-h-screen px-3 sm:px-6 text-center"
       >
         <motion.div
           variants={fadeUp}
@@ -131,7 +132,7 @@ export default function ParallaxHero({ lang }: Props) {
           transition={{ duration: 1 }}
           className="w-full max-w-3xl overflow-hidden"
         >
-          <div className="px-5 py-5 text-center sm:px-8">
+          <div className="px-3 py-5 text-center sm:px-8">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -140,12 +141,14 @@ export default function ParallaxHero({ lang }: Props) {
               transition={{ duration: 0.8 }}
               className="mt-8"
             >
-              <p className="mb-5 mt-2 font-ar text-xl font-bold leading-[1.8] text-[#A25E77] sm:text-3xl">
+              <p className="mb-4 mt-2 font-ar text-lg font-bold leading-[1.8] text-[#A25E77] sm:text-3xl">
                 "ومن آياته أن خلق لكم من أنفسكم أزواجًا لتسكنوا إليها وجعل بينكم
                 مودةً ورحمة"
               </p>
 
-              <p className="text-xl text-[#A25E77] sm:text-xl">{t.invite}</p>
+              <p className="text-base leading-7 text-[#A25E77] sm:text-xl">
+                {t.invite}
+              </p>
             </motion.div>
 
             <motion.div
@@ -158,7 +161,7 @@ export default function ParallaxHero({ lang }: Props) {
               <img
                 src={coupleImage}
                 alt="Wedding couple names"
-                className="w-[600px] max-w-full"
+                className="w-full max-w-[600px]"
               />
             </motion.div>
 
@@ -168,34 +171,34 @@ export default function ParallaxHero({ lang }: Props) {
               whileInView="visible"
               viewport={{ once: true }}
               transition={{ duration: 0.9 }}
-              className="my-5 flex items-center justify-center gap-10"
+              className="my-5 flex items-center justify-center gap-4 sm:gap-10"
             >
               <div className="flex flex-col items-center justify-between gap-5">
-                <LuCalendarDays size={50} className="text-[#A25E77]" />
+                <LuCalendarDays className="text-[#A25E77] w-9 h-9 sm:w-12 sm:h-12" />
 
-                <span className="mt-3 text-xl font-semibold text-[#A25E77]">
+                <span className="mt-3 text-sm sm:text-xl font-semibold text-[#A25E77]">
                   {t.day}
                 </span>
               </div>
 
-              <div className="flex flex-col items-center gap-3 border-x border-[#A25E77] px-5">
+              <div className="flex flex-col items-center gap-3 border-x border-[#A25E77] px-3 sm:px-5">
                 <div className="text-3xl font-bold text-[#A25E77] sm:text-6xl">
                   15
                 </div>
 
-                <div className="text-xl font-bold text-[#A25E77] sm:text-3xl">
+                <div className="text-base font-bold text-[#A25E77] sm:text-3xl">
                   {t.month}
                 </div>
 
-                <div className="text-xl font-semibold text-[#A25E77] sm:text-2xl">
+                <div className="text-base font-semibold text-[#A25E77] sm:text-2xl">
                   {t.year}
                 </div>
               </div>
 
               <div className="flex flex-col items-center gap-3">
-                <LuClock3 size={50} className="text-[#A25E77]" />
+                <LuClock3 className="text-[#A25E77] w-9 h-9 sm:w-12 sm:h-12" />
 
-                <p className="flex flex-col font-semibold text-[#A25E77] sm:text-xl">
+                <p className="flex flex-col text-sm sm:text-xl font-semibold text-[#A25E77]">
                   {t.time1}
                 </p>
               </div>
@@ -207,7 +210,7 @@ export default function ParallaxHero({ lang }: Props) {
               whileInView="visible"
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="flex items-center justify-center gap-3 text-[#A25E77] sm:gap-16 sm:text-xl"
+              className="flex items-center justify-center gap-3 text-base leading-7 text-[#A25E77] sm:gap-16 sm:text-xl"
             >
               {t.invitation}
             </motion.div>
