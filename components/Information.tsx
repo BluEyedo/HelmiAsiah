@@ -150,6 +150,8 @@ export default function Information({ lang }: Props) {
     };
   }, []);
 
+  console.log(textY);
+
   return (
     <section
       ref={ref}
@@ -157,18 +159,21 @@ export default function Information({ lang }: Props) {
       className="relative overflow-hidden bg-white pt-12 text-[#A25E77] shadow-[0_10px_40px_rgba(0,0,0,0.18)]"
     >
       {/* Background */}
-      <div className="absolute inset-0 pointer-events-none">
+      <motion.div
+        style={{ y: textY }}
+        className="pointer-events-none absolute inset-x-0 top-10 sm:top-16 md:top-20"
+      >
         <img
           src="background-wide.png"
           alt=""
           className="h-full w-full object-cover opacity-60"
         />
-      </div>
+      </motion.div>
 
       {/* Scroll Hint */}
       <div
         className={`fixed bottom-3 left-0 right-0 z-[999] flex justify-center transition-all duration-300 ${
-          scrollY > 300
+          scrollY > 500
             ? "opacity-0 translate-y-4 pointer-events-none"
             : "opacity-100"
         }`}
@@ -247,9 +252,7 @@ export default function Information({ lang }: Props) {
               >
                 <img
                   src={
-                    lang === "ar"
-                      ? "asiah&helmi-ar.png"
-                      : "asiah&helmi-en.png"
+                    lang === "ar" ? "asiah&helmi-ar.png" : "asiah&helmi-en.png"
                   }
                   alt="couple names"
                   className="w-full max-w-[620px]"
@@ -266,7 +269,7 @@ export default function Information({ lang }: Props) {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="mx-auto max-w-2xl rounded-full bg-[#A25E77] px-6 py-4 text-xl font-bold text-white shadow-lg sm:text-3xl"
+                className="mx-auto max-w-2xl rounded-full bg-[#A25E77] px-6 py-3 text-lg font-bold text-white shadow-lg sm:text-3xl"
               >
                 {t.date}
               </motion.div>

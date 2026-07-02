@@ -89,15 +89,18 @@ const fadeUp = {
 };
 
 export default function ParallaxHero({ lang }: Props) {
-  const sectionRef = useRef<HTMLElement | null>(null);
-
   const t = text[lang];
 
+  const springConfig = {
+    stiffness: 100,
+    damping: 30,
+    mass: 0.8,
+  };
+  const sectionRef = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-
   const textY = useSpring(
     useTransform(scrollYProgress, [0, 1], [0, 250]),
     springConfig,
@@ -111,7 +114,7 @@ export default function ParallaxHero({ lang }: Props) {
   return (
     <section
       ref={sectionRef}
-      className="relative mx-auto min-h-screen max-w-screen-sm overflow-hidden bg-white pt-2 shadow-lg shadow-rose-200"
+      className="relative mx-auto min-h-screen lg:h-[1050px] max-w-screen-sm overflow-hidden bg-white pt-2 shadow-lg shadow-rose-200"
     >
       <div className="absolute inset-0">
         <img src="background.png" className="h-full w-full object-cover" />
